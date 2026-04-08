@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="mohamed.ehab">
+        <createTable tableName="tp_wishlist">
+
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="destination_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="priority" type="INT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="notes" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="created_on" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_modified_on" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="created_by_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_modified_by_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="visited_date" type="DATE">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="rating" type="INT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="review" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="mohamed.ehab">
+        <addForeignKeyConstraint
+                constraintName="fk_wishlist_created_by"
+                baseTableName="tp_wishlist"
+                baseColumnNames="created_by_id"
+                referencedTableName="tp_user"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_wishlist_last_modified_by"
+                baseTableName="tp_wishlist"
+                baseColumnNames="last_modified_by_id"
+                referencedTableName="tp_user"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="3" author="mohamed.ehab">
+        <addForeignKeyConstraint
+                constraintName="fk_wishlist_user"
+                baseTableName="tp_wishlist"
+                baseColumnNames="user_id"
+                referencedTableName="tp_user"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_wishlist_destination"
+                baseTableName="tp_wishlist"
+                baseColumnNames="destination_id"
+                referencedTableName="tp_destination"
+                referencedColumnNames="id"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+</databaseChangeLog>

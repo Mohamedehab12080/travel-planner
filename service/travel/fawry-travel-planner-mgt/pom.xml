@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.fawry</groupId>
+        <artifactId>travel-planner</artifactId>
+        <version>0.0.1</version>
+        <relativePath>../../../pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.fawry.service.travel</groupId>
+    <artifactId>fawry-travel-planner-mgt</artifactId>
+    <version>0.0.1</version>
+    <packaging>jar</packaging>
+
+    <name>Web Module</name>
+    <description>Main application with REST controllers</description>
+
+    <properties>
+        <start-class>com.fawry.travel.planner.FawryTravelPlannerManagement</start-class>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>swagger</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>unit-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>common-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>user-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>destination-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules</groupId>
+            <artifactId>external-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules.wishlist</groupId>
+            <artifactId>wishlist-module</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fawry.modules.wishlist</groupId>
+            <artifactId>wishlist-adapter-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.fawry.travel.planner.FawryTravelPlannerManagement</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fawry.service</groupId>
+                <artifactId>service-bom</artifactId>
+                <version>${com.fawry.service.service-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

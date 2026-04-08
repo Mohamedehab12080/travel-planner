@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.fawry</groupId>
+        <artifactId>travel-planner</artifactId>
+        <version>0.0.1</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.fawry.modules</groupId>
+    <artifactId>modules-bom</artifactId>
+    <version>0.0.1</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <com.fawry.common-module.version>0.0.1</com.fawry.common-module.version>
+        <com.fawry.user-module.version>0.0.1</com.fawry.user-module.version>
+        <com.fawry.destination-module.version>0.0.1</com.fawry.destination-module.version>
+        <com.fawry.external-module.version>0.0.1</com.fawry.external-module.version>
+        <com.fawry.wishlist-module.version>0.0.1</com.fawry.wishlist-module.version>
+        <com.fawry.wishlist-adapter-api.version>0.0.1</com.fawry.wishlist-adapter-api.version>
+        <com.fawry.wishlist-adapter-core.version>0.0.1</com.fawry.wishlist-adapter-core.version>
+        <com.fawry.swagger.version>0.0.1</com.fawry.swagger.version>
+        <com.fawry.unit-test.version>0.0.1</com.fawry.unit-test.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>common-module</artifactId>
+                <version>${com.fawry.common-module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>swagger</artifactId>
+                <version>${com.fawry.swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>user-module</artifactId>
+                <version>${com.fawry.user-module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>destination-module</artifactId>
+                <version>${com.fawry.destination-module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>external-module</artifactId>
+                <version>${com.fawry.external-module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules.wishlist</groupId>
+                <artifactId>wishlist-module</artifactId>
+                <version>${com.fawry.wishlist-module.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules.wishlist</groupId>
+                <artifactId>wishlist-adapter-api</artifactId>
+                <version>${com.fawry.wishlist-adapter-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules.wishlist</groupId>
+                <artifactId>wishlist-adapter-core</artifactId>
+                <version>${com.fawry.wishlist-adapter-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fawry.modules</groupId>
+                <artifactId>unit-test</artifactId>
+                <version>${com.fawry.unit-test.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

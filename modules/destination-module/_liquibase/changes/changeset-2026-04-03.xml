@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="mohamed.ehab">
+        <createTable tableName="tp_destination">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country_code" type="VARCHAR(3)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="country_name" type="VARCHAR(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capital" type="VARCHAR(150)"/>
+            <column name="region" type="VARCHAR(100)"/>
+            <column name="sub_region" type="VARCHAR(100)"/>
+            <column name="population" type="BIGINT"/>
+            <column name="currency_name" type="VARCHAR(100)"/>
+            <column name="currency_code" type="VARCHAR(3)"/>
+            <column name="flag_url" type="VARCHAR(500)"/>
+            <column name="languages" type="TEXT"/>
+            <column name="time_zones" type="TEXT"/>
+            <column name="status" type="VARCHAR(20)" defaultValue="PENDING">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="TEXT"/>
+
+            <column name="created_by_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_modified_by_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="created_on" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_modified_on" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="fk_destination_created_by"
+                baseTableName="tp_destination"
+                baseColumnNames="created_by_id"
+                referencedTableName="tp_user"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                constraintName="fk_destination_last_modified_by"
+                baseTableName="tp_destination"
+                baseColumnNames="last_modified_by_id"
+                referencedTableName="tp_user"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+
+</databaseChangeLog>
