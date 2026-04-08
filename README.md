@@ -175,9 +175,9 @@ Run the SQL script located at:
 
 **2.3 Run Backend Executable**
 
-Double-click the executable file:
+**Unzip** the folder downloaded from release https://github.com/Mohamedehab12080/travel-planner/releases/tag/v1.0.0 and Double-click the executable file:
 ```
-{your clone path}/travel-planner/ApplicationRunner/travel.exe
+{your release downloaded}/ApplicationRunner/travel.exe
 ```
 
 The backend will start at: `http://localhost:7002`
