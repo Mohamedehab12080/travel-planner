@@ -108,7 +108,6 @@ Develop a full-stack web application for managing travel destinations, allowing 
 | FR-05.6 | Admin must be able to sort by country name, status, creation date | High |
 | FR-05.7 | Admin must be able to view destination details | High |
 | FR-05.8 | Admin must be able to edit destination information | High |
-| FR-05.9 | Admin must be able to delete destinations | High |
 | FR-05.10 | Admin must be able to approve pending destinations | High |
 | FR-05.11 | Admin must be able to reject destinations with optional notes | High |
 | FR-05.12 | Admin must be able to create single destination manually | Medium |
