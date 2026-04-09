@@ -33,6 +33,21 @@ public class ActivationControllerImpl implements ActivationController {
     }
 
     @Override
+    public ResponseEntity<ActivationVTO> verifyActivateAccount(String token) {
+        log.info("GET /api/auth/activate/verify - Verify activate token");
+
+        userService.verifyActivationToken(token);
+
+        ActivationVTO response = ActivationVTO.builder()
+                .success(true)
+                .message("Verified successfully")
+                .redirectUrl("")
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @Override
     public ResponseEntity<ActivationVTO> resetPasswordActivate(String token) {
         userService.resetPasswordVerification(token);
         ActivationVTO response = ActivationVTO.builder()

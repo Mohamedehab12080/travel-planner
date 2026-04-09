@@ -25,4 +25,5 @@ public interface UserService {
     void forgotPassword(ForgotPasswordRequestDTO forgotPasswordRequestDTO);
     void resetPassword(ResetPasswordDTO request);
     void resetPasswordVerification(String token);
+    void verifyActivationToken(String token);
 }

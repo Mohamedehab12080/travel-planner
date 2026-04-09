@@ -155,6 +155,43 @@ public class UserServiceImpl implements UserService {
         user.setIsActive(true);
         userRepository.update(user);
 
+        log.info("User is just acttive ");
+
+        activationToken.setUsed(true);
+        tokenRepository.update(activationToken);
+
+        log.info("User with id: {} activated successfully", user.getId());
+    }
+
+    @Override
+    @Transactional
+    public void verifyActivationToken(String token) {
+        log.info("Activating user with token: {}", token);
+
+        Token activationToken = tokenRepository.findByToken(token)
+                .orElseThrow(() -> new BusinessException(INVALID_ACTIVATION_TOKEN));
+
+        if(!activationToken.getTokenType().equals(TokenTypes.ACTIVATION))
+            throw new BusinessException(INVALID_ACTIVATION_TOKEN);
+
+        if (activationToken.isUsed()) {
+            throw new BusinessException(TOKEN_ALREADY_USED);
+        }
+
+        if (activationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+            throw new BusinessException(TOKEN_EXPIRED);
+        }
+
+        User user = activationToken.getUser();
+        if (user.getIsActive()) {
+            throw new BusinessException(USER_ALREADY_ACTIVE, user.getId());
+        }
+
+        user.setIsActive(true);
+        userRepository.update(user);
+
+        log.info("User is just acttive ");
+
         activationToken.setUsed(true);
         tokenRepository.update(activationToken);
 
@@ -384,7 +421,7 @@ public class UserServiceImpl implements UserService {
 
     // Private helper methods for sending emails
     private void sendActivationEmail(User user, String activationToken) {
-        String activationUrl = baseUrl + "/api/auth/activate?token=" + activationToken;
+        String activationUrl = "http://localhost:4200/auth/activate?token=" + activationToken+"&email="+user.getEmail();
 
         Context context = new Context();
         context.setVariable("fullName", user.getFullName());

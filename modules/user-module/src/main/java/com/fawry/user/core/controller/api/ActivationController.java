@@ -31,6 +31,19 @@ public interface ActivationController {
     })
     ResponseEntity<ActivationVTO> activateAccount(@RequestParam String token);
 
+        @GetMapping("/activate/verify")
+        @Operation(summary = "Verify user activation token", description = "Verify user activation token from email")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "Ok", content = {
+                        @Content(mediaType = "application/json", schema = @Schema(implementation = ActivationVTO.class))
+                }),
+                @ApiResponse(responseCode = "400", description = "Bad Request", content = {
+                        @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorVTO.class))
+                })
+        })
+        ResponseEntity<ActivationVTO> verifyActivateAccount(@RequestParam String token);
+
+
     @GetMapping("/reset-verify")
     @Operation(summary = "Reset password for user account", description = "Reset password for account using the token from email")
     @ApiResponses(value = {
