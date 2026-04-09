@@ -22,8 +22,7 @@
 6. [API Requirements](#api-requirements)
 7. [Database Requirements](#database-requirements)
 8. [Security Requirements](#security-requirements)
-9. [UI/UX Requirements](#uiux-requirements)
-10. [External Dependencies](#external-dependencies)
+9. [External Dependencies](#external-dependencies)
 
 ---
 
