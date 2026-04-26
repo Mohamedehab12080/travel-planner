@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -80,5 +81,10 @@ public class DestinationRepositoryImpl extends BaseRepositoryImpl<Destination,Lo
         destination.setLastModifiedBy(currentUser);
         destination.setLastModifiedOn(LocalDateTime.now());
         destinationJPARepository.save(destination);
+    }
+
+    @Override
+    public Map<Long, Boolean> checkInWishlistJoin(List<Long> ids, Long userId) {
+        return destinationJPARepository.findWishlistStatusMapByIds(ids, userId);
     }
 }

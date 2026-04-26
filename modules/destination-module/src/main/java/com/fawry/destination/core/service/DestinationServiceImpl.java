@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.fawry.common.db.model.dto.OrderDirections.DESC;
@@ -49,7 +50,9 @@ public class DestinationServiceImpl implements DestinationService {
         DestinationVTO destinationVTO = destinationMapper.toDestinationVTO(destination);
         if(currentRole.equals(Role.ROLE_USER.name())) {
             Long currentUserId= securityUtilsService.getCurrentUserId();
-            destinationVTO.setInWishlist(!wishlistAdapterService.inWishlistCheck(currentUserId,List.of(destinationVTO.getId())).isEmpty());
+            Map<Long, Boolean> destinationsInWishlist = destinationRepository.checkInWishlistJoin(List.of(destinationVTO.getId()), currentUserId);
+            destinationVTO.setInWishlist(destinationsInWishlist.getOrDefault(destinationVTO.getId(),false));
+//            destinationVTO.setInWishlist(!wishlistAdapterService.inWishlistCheck(currentUserId,List.of(destinationVTO.getId())).isEmpty());
         }
         return destinationVTO;
     }
@@ -190,12 +193,17 @@ public class DestinationServiceImpl implements DestinationService {
         List<Destination> destinations=destinationRepository.selectAllByFilters(destinationSearchFilter);
         List<DestinationListItemVTO> destinationListItemVTOs=destinationMapper.toDestinationListItemVTOs(destinations);
         if(currentUserRole.equals(Role.ROLE_USER.name())) {
-            List<Long> destinationIds=destinations.stream().map(Destination::getId).toList();
-            Long currentUserId= securityUtilsService.getCurrentUserId();
-            List<Long> destinationsInWishlist=wishlistAdapterService.inWishlistCheck(currentUserId, destinationIds);
-            destinationListItemVTOs.forEach(destinationListItemVTO->{
-                destinationListItemVTO.setInWishlist(destinationsInWishlist.contains(destinationListItemVTO.getId()));
-            });
+            List<Long> destinationIds = destinations.stream().map(Destination::getId).toList();
+            Long currentUserId = securityUtilsService.getCurrentUserId();
+            Map<Long, Boolean> destinationsInWishlist = destinationRepository.checkInWishlistJoin(destinationIds, currentUserId);
+            for (DestinationListItemVTO vto : destinationListItemVTOs) {
+                boolean inWishlist = destinationsInWishlist.getOrDefault(vto.getId(), false);
+                vto.setInWishlist(inWishlist);
+            }
+//            List<Long> destinationsInWishlist=wishlistAdapterService.inWishlistCheck(currentUserId, destinationIds);
+//            destinationListItemVTOs.forEach(destinationListItemVTO->{
+//                destinationListItemVTO.setInWishlist(destinationsInWishlist.contains(destinationListItemVTO.getId()));
+//            });
         }
         Long total=destinationRepository.countAllByFilters(destinationSearchFilter);
         log.info("Total number of destinations: {}", total);

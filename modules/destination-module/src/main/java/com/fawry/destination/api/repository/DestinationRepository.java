@@ -7,6 +7,7 @@ import com.fawry.destination.model.filter.DestinationSearchFilter;
 import com.fawry.destination.model.vto.DestinationSummaryVTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface DestinationRepository extends BaseRepository<Destination, Long> {
@@ -19,4 +20,5 @@ public interface DestinationRepository extends BaseRepository<Destination, Long>
     DestinationSummaryVTO countSummaryVTO();
     List<Destination> bulkInsert(List<Destination> destinations);
     void update(Destination destination);
+    Map<Long,Boolean> checkInWishlistJoin(List<Long> ids,Long userId);
 }
